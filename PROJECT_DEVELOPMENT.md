@@ -7,7 +7,7 @@ Many primary school students struggle to memorise basic mathematical facts, espe
 
 This issue is significant because automatic recall of basic maths facts is a foundational skill. When students cannot answer simple multiplication questions quickly, it affects their confidence, slows their problem‑solving, and can create long‑term gaps in numeracy.
 
-A software solution is appropriate because digital games can provide instant feedback, timed challenges, and adaptive difficulty—features that are difficult to achieve with paper-based methods. A speed‑based maths game can make practice more enjoyable, encourage repeated attempts, and track performance over time, helping students build fluency in a motivating way. 
+A software solution is appropriate because digital games can provide instant feedback, timed challenges, and adaptive difficulty features that are difficult to achieve with physical worksheet methods. A speed‑based maths game can make practice more enjoyable, encourage repeated attempts, and track performance over time, helping students build fluency in a motivating way.
 
 ---
 ### **1.2 Project Purpose and Boundaries**
@@ -44,53 +44,64 @@ These factors could influence the project direction by identifying the basic nee
 - Technical knowledge: The development will be restricted to my programming skills
 - Hardware/software access: The game must run on weak school laptops
 
-
 ---
 ### **1.7 Requirements Analysis and Prioritisation**
-Functional requirements (question generation, timing, scoring an answer checking) will be prioritised as they relate to the core gameplay and without it, the game would not be able to fulfill its purpose. Non-funcitonal requirements have also been prioritised but to a lesser degree. For example usability and reliability are also needed but not essential to the core functionality of the game, but are still important because the target audience is young children who need a simple, frustration free experience. 
+Functional requirements (generating questions, timing, scoring and checking answers) will be prioritised as they relate to the core gameplay and without it, the game would not be able to fulfil its purpose. Non-functional requirements have also been prioritised but to a lesser degree. For example usability and reliability are also needed but not essential to the core functionality of the game, but are still important because the target audience is young children who need a simple, frustration free experience.
 
-Some trade-offs made due to the contraints would be visual elements and potentially a visually appealing graphical user interface. But overall the requirements that are the main focus point align closely with the identified problem of children needing a fun, fast and effective way to practise basic maths, and the game focuses on delivering exactly that.
+
+Some trade-offs made due to the constraints would be visual elements and potentially a visually appealing graphical user interface. But overall the requirements that are the main focus point align closely with the identified problem of children needing a fun, fast and effective way to practise basic maths, and the game focuses on delivering exactly that.
 
 ---
 ## <ins> **2. Research and Planning**<ins>
 ---
 ### **2.1 Development Methodology**
+The development approach used for this project will be a waterfall, a linear and structure approach. This method was chosen because it aligns well with the project's clear requirements, simple development and the limited amount of time.
+
+The core idea (a simple time based maths game for practising) has been well defined from the beginning. The essential features (question generation, timer, scoring, simple UI) are unlikely to suffer and significant changes. Waterfall works effectively when requirements are known early and remain stable.
+
+The game is relatively simple compared to larger software systems. Because the project does not require complex systems, databases, or unpredictable user interactions, a linear approach was efficient and manageable
+
+The project needs to be completed before the due date near the end of term 2. Waterfall's structured phases (planning - design - development - testing - evaluations) makes it easier to allocate time and ensure progress stayed on track. Each stage had clear deliverables, reducing the risk of significantly falling behind
+
+Although feedback will still be valuable, the game does not need constant design or major feature changes. Most improvements should be minor such as difficulty or GUI layout. These changes could be handled during the testing phase rather than through ongoing iterative cycles.
 
 ---
 ### **2.2 Tools and Technologies**
+**Programming language**\
+Python will be used to develop this program. Its simple and readable reducing the need for a complex understanding of the language, which is appropriate given the time constraints of this project. Python is also widely supported on low end hardware such as school laptops allowing for more access
 
-**Justify** the selection of software applications, engines, developer tools, programming languages, IDEs, frameworks, libraries and/or hardware components.
+**GUI Framework**\
+Pygame was used to develop the graphical user interface and handle game logic. It provides built in functionality for rendering graphics, handling user input, and managing timing, which are essential for this project. This reduced the need to build a system from scratch and increasing development efficiency and reliability. Pygame also allows the creation of a simple and interactive interface suitable for young users.
 
-**Explain** how these tools supported efficient and effective development.
+**Development Environment**\
+Visual Studio Code was used to write, test and debug code efficiently. Features such as syntax highlighting, error detection, and debugging tools improve code quality and reduce development time.
+
+**Version Control**\
+GitHub was used to track code changes through commits, allowing previous versions to be restored if errors occured. It also provided access to the project from multiple devices improving organisation and documentation of the development process.
+
+Overall, these tools and technologies supported efficient development by reducing complexity, improving, code reliability, and ensuring the final product meets both functional and non-functional requirements.
 
 ---
 ### **2.3 Gantt Chart / Timeline**
+![Gantt Chart](<Theory/Gantt Chart.png>)
+SUBJECT TO CHANGE ACCORDING TO DUE DATE
 
-Include a timeline showing key project milestones.
-
-**Explain** how time was allocated to planning, development, testing, and evaluation.
+Time was allocated in a structured approach to match the waterfall development method. The initial weeks were dedicated to planning, including defining the problem, requirements and methodology. This sets a clear foundation and direction for the overall project before the actual development began. A short period was then used for research and selecting the appropriate tools and technologies that would be used. System design tasks such as diagrams and modelling were completed next to establish how the software would function before coding. Then the majority of the time would be allocated to the development of the project, including the core gameplay, GUI, and user account features, as this is the most complex and time intensive stage. Testing and evaluation would be in the last stages to identify and fix issues. The final weeks were reserved for evaluation, finishing documentation, and reflection to assess how well the project met its requirements and to complete all components.
 
 ---
 ### **2.4 Communication Plan**
-
-**Explain** how client or peer feedback was obtained and incorporated.
+Feedback will be obtained primarily from friends and the teacher at key stages of development, particularly after early prototypes and during testing. Demonstrations of the project in used will gather feedback on usability, difficulty, and overall engagement. This feedback was then incorporated by adjusting game features such as difficulty balancing, interface layout and clarity of instructions to better suit the target audience.
 
 ---
 ### **2.5 Resource Allocation Justification**
+Time was allocated with the majority dedicated to development, as implementing the core functionality requires the most effort and work. Planning and design were given sufficient time early to plan and provide a foundation for the rest of the project. Testing and evaluation were allocated time towards the end to ensure the software met requirements, fix issues, and reflect on the overall project.
 
-**Justify** the resource allocation for the project, including:
+Software resources such as Python, Pygame, and Visual Studio Code were chosen because they are lightweight, accessible, and suitable for the project's scope. Hardware requirements were minimal, ensuring compatibility with a larger range of devices.
 
-* Time
-
-* Software and hardware tools
-
-* Human input (client, peers, teacher feedback)
-
+Human input from friends and the teacher will be used to identify usability isssues and guide improvments, ensuring the final product aligns with stakeholder needs.
 ---
-
 ## <ins> **3. System Design** <ins>
 ---
-
 ### **3.1 Context Diagram**
 
 Include a context diagram showing system boundaries and external entities.
@@ -139,9 +150,9 @@ Include a class diagram if your project uses an OOP approach.
 
 * Modular design
 
-* Object-oriented principles 
+* Object-oriented principles
 
-* Reuse of code 
+* Reuse of code
 
 * Validation and error handling
 
@@ -184,7 +195,7 @@ Describe testing approaches, such as:
 
 * Unit testing
 
-* Integration testing 
+* Integration testing
 
 * User testing
 
@@ -206,7 +217,7 @@ Describe testing approaches, such as:
 ---
 ### **5.4 Improvements and Future Development**
 
-**Outline** your project’s limitations. 
+**Outline** your project’s limitations.
 
 **Explain** realistic future enhancements.
 
@@ -216,22 +227,26 @@ Describe testing approaches, such as:
 ---
 ### **6.1 Summary of Client or Peer Feedback**
 
-**Summarise** feedback received and explain how it influenced development. 
+**Summarise** feedback received and explain how it influenced development.
 
-You could collect a **‘PMI’ (Plus, Minus, Implication)** table from **at least three** different people after testing, or **record and summarise an interview** with **at least three** three people who test the software. 
+
+You could collect a **‘PMI’ (Plus, Minus, Implication)** table from **at least three** different people after testing, or **record and summarise an interview** with **at least three** three people who test the software.
 
 ---
 ### **6.2 Secure Software Design and Data Handling**
 
 **Evaluate** the approach undertaken to safely and securely collect, use, and store data.
 
-Your evaluation should address: 
+Your evaluation should address:
+
 
 * Secure coding practices applied during development
 
-* Input validation and error handling 
+* Input validation and error handling
 
-* Data storage and protection methods 
+
+* Data storage and protection methods
+
 
 * The impact of secure software design on user trust, data integrity, and system reliability
 
@@ -249,7 +264,8 @@ Your evaluation should address:
 
 * Full Gantt Chart
 
-* Complete Data Dictionary 
+* Complete Data Dictionary
+
 
 * Full Test Logs
 
