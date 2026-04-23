@@ -68,7 +68,7 @@ Although feedback will still be valuable, the game does not need constant design
 ---
 ### **2.2 Tools and Technologies**
 **Programming language**\
-Python will be used to develop this program. Its simple and readable reducing the need for a complex understanding of the language, which is appropriate given the time constraints of this project. Python is also widely supported on low end hardware such as school laptops allowing for more access
+Python was used to develop this program. Its simple and readable reducing the need for a complex understanding of the language, which is appropriate given the time constraints of this project. Python is also widely supported on low end hardware such as school laptops allowing for more access
 
 **GUI Framework**\
 Pygame was used to develop the graphical user interface and handle game logic. It provides built in functionality for rendering graphics, handling user input, and managing timing, which are essential for this project. This reduced the need to build a system from scratch and increasing development efficiency and reliability. Pygame also allows the creation of a simple and interactive interface suitable for young users.
@@ -77,7 +77,7 @@ Pygame was used to develop the graphical user interface and handle game logic. I
 Visual Studio Code was used to write, test and debug code efficiently. Features such as syntax highlighting, error detection, and debugging tools improve code quality and reduce development time.
 
 **Version Control**\
-GitHub was used to track code changes through commits, allowing previous versions to be restored if errors occured. It also provided access to the project from multiple devices improving organisation and documentation of the development process.
+GitHub was used to track code changes through commits, allowing previous versions to be restored if errors occurred. It also provided access to the project from multiple devices improving organisation and documentation of the development process.
 
 Overall, these tools and technologies supported efficient development by reducing complexity, improving, code reliability, and ensuring the final product meets both functional and non-functional requirements.
 
@@ -98,46 +98,71 @@ Time was allocated with the majority dedicated to development, as implementing t
 
 Software resources such as Python, Pygame, and Visual Studio Code were chosen because they are lightweight, accessible, and suitable for the project's scope. Hardware requirements were minimal, ensuring compatibility with a larger range of devices.
 
-Human input from friends and the teacher will be used to identify usability isssues and guide improvments, ensuring the final product aligns with stakeholder needs.
+Human input from friends and the teacher will be used to identify usability issues and guide improvements, ensuring the final product aligns with stakeholder needs.
 ---
 ## <ins> **3. System Design** <ins>
 ---
-### **3.1 Context Diagram**
-
-Include a context diagram showing system boundaries and external entities.
+### **3.1 Context Diagram/Data Flow Diagram Level 0**
+![Context/Data Flow Level 0 Diagram](<Theory/Context and Data Flow Lv0.png>)
 
 ---
-### **3.2 Data Flow Diagrams (Level 0 and Level 1)**
-
-Illustrate how data moves through the system.
+### **3.2 Data Flow Diagrams Level 1)**
+![Data Flow Level 1 Diagram](<Theory/Data Flow Lv1.png>)
 
 ---
 ### **3.3 Structure Chart**
-
-Show the modular structure of the system and relationships between modules.
+![Structure Chart](<Theory/Structure Chart.png>)
 
 ---
-### **3.4 IPO Chart {#3.4-ipo-chart}**
-
+### **3.4 IPO Chart**
 | Input | Process | Output |
-| :---- | :---- | :---- |
-|  |  |  |
+| :---- | :------ | :----- |
+| Username, password | Validate user details and check account information | Login confirmation or error message |
+| New username, new password | Validate details and create a new user account | Account created message |
+| Game mode selection | Record chosen mode for the session | Selected game mode |
+| Difficulty selection | Record chosen difficulty for the session | Selected difficulty level |
+| Start | Begin a timed game session | Active game round |
+| Game mode, difficulty level | Generate a suitable maths question | Maths question displayed |
+| User answer | Compare answer to correct result | Correct or incorrect feedback |
+| Correct answer, current score | Update score | New score displayed |
+| Number of correct answers, total questions answered | Calculate accuracy | Accuracy percentage |
+| Timer data | Check remaining game time | Time left displayed or round ended |
+| Final score, accuracy, round performance | Save results to user records | Updated progress and saved score |
+| Saved user records | Retrieve high scores and previous performance | High scores and progress shown |
+| End of round data | Prepare summary of performance | Final results screen |
 
 ---
 ### **3.5 Data Dictionary**
-
 | Name | Type | Description |
 | :---- | :---- | :---- |
-| username | String | Stores user login name |
-| taskList | List | Stores user tasks |
-| sessionData | JSON | Stores session state |
+| username | String | Stores the user’s account name for login and score records |
+| password | String | Stores the password entered by the user during login or registration |
+| sessionToken | String | Stores a random token linked to a user account for secure access |
+| gameMode | String | Stores the selected game mode, such as addition, subtraction, multiplication, division, or mixed |
+| difficultyLevel | String | Stores the selected difficulty level for the round |
+| startCommand | Boolean | Indicates that the player has chosen to begin a game round |
+| questionText | String | Stores the maths question shown to the player |
+| correctAnswer | Integer | Stores the correct answer for the current question |
+| userAnswer | Integer | Stores the answer entered by the player |
+| answerStatus | Boolean | Indicates whether the player’s answer is correct or incorrect |
+| score | Integer | Stores the player’s current score during a round |
+| highScore | Integer | Stores the highest score achieved by a player |
+| accuracy | Float | Stores the percentage of correct answers given by the player |
+| timeLimit | Integer | Stores the total time allowed for a game round |
+| timeRemaining | Integer | Stores the amount of time left in the current round |
+| questionsAnswered | Integer | Stores the total number of questions attempted in a round |
+| correctAnswers | Integer | Stores the total number of questions answered correctly |
+| gamesPlayed | Integer | Stores the total number of rounds played by a user |
+| roundResult | Record | Stores the summary data for one completed round, such as score and accuracy |
+| performanceHistory | List | Stores previous results for a user across multiple rounds |
+| leaderboardData | List | Stores score information used to display rankings or top scores |
+| feedbackMessage | String | Stores messages shown to the player, such as correct, incorrect, login success, or error messages |
+| accountRecord | Record | Stores the full set of account information for a user |
+| scoreRecord | Record | Stores saved score and performance information for a user |
 
 ---
-### **3.6 UML Class Diagram (if OOP)**
-
-Include a class diagram if your project uses an OOP approach.
-
-**Explain** the class structure and relationships.
+### **3.6 UML Class Diagram**
+Not sure if I will incorporate classes into this project yet unless all the data get's too messy and I want a cleaner way to manage things like user account details or game session data.
 
 ---
 ## <ins> **4. Producing and Implementing** <ins>
