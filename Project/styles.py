@@ -1,0 +1,9 @@
+BLUE  = "#0c2752"
+GREEN = "#33813c"
+RED   = "#e05353"
+WHITE = "#F7F9FC"
+CARD  = "#a7bbdb"
+MUTED = "#3A3A3A"
+
+BASE_W, BASE_H = 620, 540
+MIN_W,  MIN_H  = 480, 400
