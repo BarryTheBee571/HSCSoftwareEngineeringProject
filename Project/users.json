@@ -1,0 +1,118 @@
+{
+    "1234": {
+        "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "token": "eb68c008e5c387d0357b79dbe07835bf",
+        "high_score": 640,
+        "games_played": 16,
+        "total_correct": 160,
+        "total_answered": 165,
+        "tests_started": 7,
+        "total_time_spent_seconds": 232,
+        "longest_unlimited_streak": 64,
+        "mode_counts": {
+            "addition": 6,
+            "subtraction": 0,
+            "multiplication": 0,
+            "division": 0,
+            "mixed": 1
+        },
+        "most_played_game_mode": "addition",
+        "difficulty_stats": {
+            "easy": {
+                "tests": 5,
+                "correct": 101,
+                "answered": 101,
+                "accuracy_sum": 400.0,
+                "average_accuracy": 80.0
+            },
+            "medium": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "hard": {
+                "tests": 1,
+                "correct": 11,
+                "answered": 12,
+                "accuracy_sum": 91.66666666666666,
+                "average_accuracy": 91.66666666666666
+            }
+        },
+        "time_mode_stats": {
+            "30": {
+                "tests": 2,
+                "correct": 34,
+                "answered": 34,
+                "accuracy_sum": 200.0,
+                "average_accuracy": 100.0
+            },
+            "60": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "90": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "120": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "unlimited": {
+                "tests": 4,
+                "correct": 78,
+                "answered": 79,
+                "accuracy_sum": 291.66666666666663,
+                "average_accuracy": 72.91666666666666
+            }
+        },
+        "game_mode_stats": {
+            "addition": {
+                "tests": 5,
+                "correct": 101,
+                "answered": 101,
+                "accuracy_sum": 400.0,
+                "average_accuracy": 80.0
+            },
+            "subtraction": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "multiplication": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "division": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "accuracy_sum": 0.0,
+                "average_accuracy": 0.0
+            },
+            "mixed": {
+                "tests": 1,
+                "correct": 11,
+                "answered": 12,
+                "accuracy_sum": 91.66666666666666,
+                "average_accuracy": 91.66666666666666
+            }
+        }
+    }
+}

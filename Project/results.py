@@ -5,64 +5,74 @@ from styles import BLUE, GREEN, RED, WHITE, CARD, MUTED
 
 class ResultsFrame(ctk.CTkFrame):
 
-    def __init__(self, app, score, correct, total, mode, difficulty):
+    def __init__(self, app, score, correct, total, mode, difficulty, time_limit, time_spent_seconds, longest_streak_in_test):
         super().__init__(app, fg_color=WHITE, corner_radius=0)
-        self.app        = app
-        self.score      = score
-        self.correct    = correct
-        self.total      = total
-        self.mode       = mode
+        self.app = app
+        self.score = score
+        self.correct = correct
+        self.total = total
+        self.mode = mode
         self.difficulty = difficulty
-        self._scalable  = []
+        self.time_limit = time_limit
+        self.time_spent_seconds = time_spent_seconds
+        self.longest_streak_in_test = longest_streak_in_test
+        self._scalable = []
 
         self.accuracy = (correct / total * 100) if total > 0 else 0
 
         if self.app.current_user:
             auth.update_stats(
                 self.app.current_user,
-                score, correct, total,
+                score,
+                correct,
+                total,
+                mode,
+                difficulty,
+                time_limit,
+                time_spent_seconds,
+                longest_streak_in_test,
             )
 
-        self._build()
+        self.build_ui()
 
-    def _s(self, base):
-        return self.app._s(base)
+    def scale_value(self, base):
+        return self.app.scale_value(base)
 
-    def _lighten(self, hex_color):
+    def lighten_color(self, hex_color):
         r = min(255, int(hex_color[1:3], 16) + 30)
         g = min(255, int(hex_color[3:5], 16) + 30)
         b = min(255, int(hex_color[5:7], 16) + 30)
         return f"#{r:02x}{g:02x}{b:02x}"
 
-    def apply_scale(self):
+    def apply_scaling(self):
         for widget, family, base_size, weight in self._scalable:
             try:
-                widget.configure(font=(family, max(8, self._s(base_size)), weight))
+                widget.configure(font=(family, max(8, self.scale_value(base_size)), weight))
             except Exception:
                 pass
 
-    def _label(self, parent, text, size=14, bold=False, color=WHITE, **kw):
+    def create_label(self, parent, text, size=14, bold=False, color=WHITE, **kw):
         weight = "bold" if bold else "normal"
         lbl = ctk.CTkLabel(
             parent, text=text,
-            font=("Trebuchet MS", self._s(size), weight),
+            font=("Time New Roman", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Trebuchet MS", size, weight))
+        self._scalable.append((lbl, "Time New Roman", size, weight))
         return lbl
 
-    def _btn(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
+    def create_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
         btn = ctk.CTkButton(
             parent, text=text, command=cmd,
-            fg_color=fg, hover_color=self._lighten(fg),
+            fg_color=fg, hover_color=self.lighten_color(fg),
             text_color=text_color,
-            font=("Trebuchet MS", self._s(15), "bold"),
-            corner_radius=10, width=self._s(width), height=self._s(height),
+            font=("Time New Roman", self.scale_value(15), "bold"),
+            corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Trebuchet MS", 15, "bold"))
+        self._scalable.append((btn, "Time New Roman", 15, "bold"))
         return btn
 
-    def _build(self):
+    def build_ui(self):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(1, weight=0)
@@ -73,25 +83,24 @@ class ResultsFrame(ctk.CTkFrame):
         hdr.grid(row=0, column=0, sticky="ew")
         hdr.grid_columnconfigure(0, weight=1)
 
-        heading, sub = self._get_result_message()
-        self._label(hdr, heading, size=26, bold=True, color=BLUE).grid(
+        heading, sub = self.generate_result_message()
+        self.create_label(hdr, heading, size=26, bold=True, color=BLUE).grid(
             row=0, column=0, pady=(18, 4))
-        self._label(hdr, sub, size=12, color=MUTED).grid(
+        self.create_label(hdr, sub, size=12, color=MUTED).grid(
             row=1, column=0, pady=(0, 14))
 
         if self.app.current_user:
-            self._maybe_show_new_highscore()
+            self.show_new_highscore_if_applicable()
 
         sc = ctk.CTkFrame(self, fg_color=CARD, corner_radius=14)
         sc.grid(row=2, column=0, padx=60, pady=16, sticky="nsew")
         sc.grid_columnconfigure(0, weight=1)
 
         stats = [
-            ("Score",              f"{self.score} pts",          BLUE),
-            ("Questions Answered", str(self.total),              BLUE),
-            ("Correct Answers",    str(self.correct),            GREEN),
-            ("Accuracy",           f"{self.accuracy:.1f}%",
-             GREEN if self.accuracy >= 70 else RED),
+            ("Score", f"{self.score} pts", BLUE),
+            ("Questions Answered", str(self.total), BLUE),
+            ("Correct Answers", str(self.correct), GREEN),
+            ("Accuracy", f"{self.accuracy:.1f}%", GREEN if self.accuracy >= 70 else RED),
         ]
 
         if self.app.current_user:
@@ -102,8 +111,8 @@ class ResultsFrame(ctk.CTkFrame):
         for i, (lbl, val, val_color) in enumerate(stats):
             row = ctk.CTkFrame(sc, fg_color="transparent")
             row.grid(row=i * 2, column=0, padx=30, pady=8, sticky="ew")
-            self._label(row, lbl, size=15, color=MUTED).pack(side="left")
-            self._label(row, val, size=16, bold=True, color=val_color).pack(side="right")
+            self.create_label(row, lbl, size=15, color=MUTED).pack(side="left")
+            self.create_label(row, val, size=16, bold=True, color=val_color).pack(side="right")
             if i < len(stats) - 1:
                 ctk.CTkFrame(sc, fg_color=WHITE, height=1).grid(
                     row=i * 2 + 1, column=0, padx=30, sticky="ew")
@@ -111,18 +120,18 @@ class ResultsFrame(ctk.CTkFrame):
         btn_row = ctk.CTkFrame(self, fg_color="transparent")
         btn_row.grid(row=3, column=0, pady=20)
 
-        self._btn(
-            btn_row, "▶  Play Again",
-            lambda: self.app.show_game(self.mode, self.difficulty),
+        self.create_button(
+            btn_row, "Play Again",
+            lambda: self.app.show_game(self.mode, self.difficulty, self.time_limit),
             width=165, height=46,
         ).pack(side="left", padx=10)
 
-        self._btn(
-            btn_row, "☰  Main Menu", self.app.show_menu,
+        self.create_button(
+            btn_row, "Main Menu", self.app.show_menu,
             fg=CARD, text_color=BLUE, width=165, height=46,
         ).pack(side="left", padx=10)
 
-    def _get_result_message(self):
+    def generate_result_message(self):
         if self.total == 0:
             return "Round Over!", "No questions answered"
         if self.accuracy >= 90:
@@ -134,7 +143,7 @@ class ResultsFrame(ctk.CTkFrame):
         else:
             return "Round Over!", f"{self.score} points — try again!"
 
-    def _maybe_show_new_highscore(self):
+    def show_new_highscore_if_applicable(self):
         if not self.app.current_user:
             return
         user_data = auth.get_user(self.app.current_user)
@@ -143,6 +152,6 @@ class ResultsFrame(ctk.CTkFrame):
         if self.score > 0 and user_data["high_score"] == self.score and self.score >= 10:
             banner = ctk.CTkFrame(self, fg_color=GREEN, corner_radius=8)
             banner.grid(row=1, column=0, padx=80, pady=(8, 0), sticky="ew")
-            self._label(
-                banner, "🏆  New High Score!", size=13, bold=True, color=WHITE,
+            self.create_label(
+                banner, "New High Score!", size=13, bold=True, color=WHITE,
             ).pack(pady=8)
