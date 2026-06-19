@@ -1,117 +1,104 @@
 {
     "1234": {
         "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-        "token": "eb68c008e5c387d0357b79dbe07835bf",
-        "high_score": 640,
-        "games_played": 16,
-        "total_correct": 160,
-        "total_answered": 165,
-        "tests_started": 7,
-        "total_time_spent_seconds": 232,
-        "longest_unlimited_streak": 64,
+        "token": "b83dca8f8f888976317f39b21eaa29bd",
+        "high_score": 470,
+        "games_played": 18,
+        "total_correct": 206,
+        "total_answered": 213,
+        "tests_started": 22,
+        "total_time_spent_seconds": 385,
+        "longest_unlimited_streak": 27,
         "mode_counts": {
-            "addition": 6,
-            "subtraction": 0,
-            "multiplication": 0,
-            "division": 0,
+            "addition": 8,
+            "subtraction": 4,
+            "multiplication": 6,
+            "division": 3,
             "mixed": 1
         },
         "most_played_game_mode": "addition",
         "difficulty_stats": {
             "easy": {
-                "tests": 5,
-                "correct": 101,
-                "answered": 101,
-                "accuracy_sum": 400.0,
-                "average_accuracy": 80.0
+                "tests": 8,
+                "correct": 167,
+                "answered": 173,
+                "average_accuracy": 96.53179190751445
             },
             "medium": {
-                "tests": 0,
-                "correct": 0,
-                "answered": 0,
-                "accuracy_sum": 0.0,
-                "average_accuracy": 0.0
+                "tests": 5,
+                "correct": 33,
+                "answered": 34,
+                "average_accuracy": 97.05882352941177
             },
             "hard": {
-                "tests": 1,
-                "correct": 11,
-                "answered": 12,
-                "accuracy_sum": 91.66666666666666,
-                "average_accuracy": 91.66666666666666
+                "tests": 5,
+                "correct": 6,
+                "answered": 6,
+                "average_accuracy": 100.0
             }
         },
         "time_mode_stats": {
             "30": {
-                "tests": 2,
-                "correct": 34,
-                "answered": 34,
-                "accuracy_sum": 200.0,
-                "average_accuracy": 100.0
+                "tests": 3,
+                "correct": 57,
+                "answered": 58,
+                "average_accuracy": 98.27586206896551
             },
             "60": {
-                "tests": 0,
-                "correct": 0,
-                "answered": 0,
-                "accuracy_sum": 0.0,
-                "average_accuracy": 0.0
+                "tests": 1,
+                "correct": 47,
+                "answered": 48,
+                "average_accuracy": 97.91666666666666
             },
             "90": {
                 "tests": 0,
                 "correct": 0,
                 "answered": 0,
-                "accuracy_sum": 0.0,
                 "average_accuracy": 0.0
             },
             "120": {
                 "tests": 0,
                 "correct": 0,
                 "answered": 0,
-                "accuracy_sum": 0.0,
                 "average_accuracy": 0.0
             },
             "unlimited": {
-                "tests": 4,
-                "correct": 78,
-                "answered": 79,
-                "accuracy_sum": 291.66666666666663,
-                "average_accuracy": 72.91666666666666
+                "tests": 14,
+                "correct": 102,
+                "answered": 107,
+                "average_accuracy": 95.32710280373831
             }
         },
         "game_mode_stats": {
             "addition": {
-                "tests": 5,
-                "correct": 101,
-                "answered": 101,
-                "accuracy_sum": 400.0,
-                "average_accuracy": 80.0
+                "tests": 7,
+                "correct": 124,
+                "answered": 126,
+                "average_accuracy": 98.4126984126984
             },
             "subtraction": {
-                "tests": 0,
-                "correct": 0,
-                "answered": 0,
-                "accuracy_sum": 0.0,
-                "average_accuracy": 0.0
+                "tests": 3,
+                "correct": 11,
+                "answered": 11,
+                "average_accuracy": 100.0
             },
             "multiplication": {
-                "tests": 0,
-                "correct": 0,
-                "answered": 0,
-                "accuracy_sum": 0.0,
-                "average_accuracy": 0.0
+                "tests": 4,
+                "correct": 53,
+                "answered": 57,
+                "average_accuracy": 92.98245614035088
             },
             "division": {
-                "tests": 0,
-                "correct": 0,
-                "answered": 0,
-                "accuracy_sum": 0.0,
-                "average_accuracy": 0.0
+                "tests": 3,
+                "correct": 18,
+                "answered": 19,
+                "average_accuracy": 94.73684210526315
             },
             "mixed": {
                 "tests": 1,
-                "correct": 11,
-                "answered": 12,
-                "accuracy_sum": 91.66666666666666,
-                "average_accuracy": 91.66666666666666
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
             }
         }
     }

@@ -2,7 +2,6 @@
 import auth
 from styles import BASE_W, BASE_H, MIN_W, MIN_H, WHITE
 
-
 class App(ctk.CTk):
 
     def __init__(self):
@@ -66,6 +65,13 @@ class App(ctk.CTk):
         from menu import MenuFrame
         self.switch_frame(MenuFrame(self))
 
+    def show_stats(self):
+        if not self.current_user:
+            self.show_menu()
+            return
+        from stats import StatsFrame
+        self.switch_frame(StatsFrame(self))
+
     def show_game(self, mode, difficulty, time_limit):
         from game import GameFrame
         if self.current_user:
@@ -77,6 +83,5 @@ class App(ctk.CTk):
         self.switch_frame(ResultsFrame(
             self, score, correct, total, mode, difficulty, time_limit, time_spent_seconds, longest_streak_in_test,
         ))
-
 
 App().mainloop()

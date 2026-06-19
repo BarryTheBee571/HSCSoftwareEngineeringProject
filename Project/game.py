@@ -3,7 +3,6 @@ import time
 from questions import generate_question
 from styles import BLUE, GREEN, RED, WHITE, CARD, MUTED
 
-
 class GameFrame(ctk.CTkFrame):
     def __init__(self, app, mode, difficulty, time_limit=30):
         super().__init__(app, fg_color=WHITE, corner_radius=0)
@@ -46,10 +45,10 @@ class GameFrame(ctk.CTkFrame):
         weight = "bold" if bold else "normal"
         lbl = ctk.CTkLabel(
             parent, text=text,
-            font=("Times New Roman", self.scale_value(size), weight),
+            font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Times New Roman", size, weight))
+        self._scalable.append((lbl, "Comic Sans MS", size, weight))
         return lbl
 
     def create_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -57,10 +56,10 @@ class GameFrame(ctk.CTkFrame):
             parent, text=text, command=cmd,
             fg_color=fg, hover_color=self.lighten_color(fg),
             text_color=text_color,
-            font=("Times New Roman", self.scale_value(15), "bold"),
+            font=("Comic Sans MS", self.scale_value(15), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Times New Roman", 15, "bold"))
+        self._scalable.append((btn, "Comic Sans MS", 15, "bold"))
         return btn
 
     def build_ui(self):
@@ -81,12 +80,12 @@ class GameFrame(ctk.CTkFrame):
             sb, text="Menu", command=self.go_back_to_menu,
             fg_color=WHITE, text_color=BLUE,
             hover_color=self.lighten_color(WHITE),
-            font=("Times New Roman", self.scale_value(11), "normal"),
+            font=("Comic Sans MS", self.scale_value(11), "normal"),
             border_width=1, border_color=BLUE,
             corner_radius=6, width=self.scale_value(60), height=self.scale_value(32),
         )
         back_btn.grid(row=0, column=0, padx=8, pady=8)
-        self._scalable.append((back_btn, "Times New Roman", 11, "normal"))
+        self._scalable.append((back_btn, "Comic Sans MS", 11, "normal"))
 
         left = ctk.CTkFrame(sb, fg_color="transparent")
         left.grid(row=0, column=1, padx=20, pady=10)
@@ -113,7 +112,7 @@ class GameFrame(ctk.CTkFrame):
 
         self.answer_entry = ctk.CTkEntry(
             self,
-            font=("Times New Roman", self.scale_value(28), "bold"),
+            font=("Comic Sans MS", self.scale_value(28), "bold"),
             width=self.scale_value(200), height=self.scale_value(55),
             justify="center",
             fg_color=CARD, border_color=BLUE, border_width=2,
@@ -123,7 +122,7 @@ class GameFrame(ctk.CTkFrame):
         self.answer_entry.grid(row=2, column=0, pady=16)
         self.answer_entry.bind("<Return>", self.submit_answer)
         self.answer_entry.focus()
-        self._scalable.append((self.answer_entry, "Times New Roman", 28, "bold"))
+        self._scalable.append((self.answer_entry, "Comic Sans MS", 28, "bold"))
 
         controls = ctk.CTkFrame(self, fg_color="transparent")
         controls.grid(row=3, column=0)
@@ -186,7 +185,7 @@ class GameFrame(ctk.CTkFrame):
         else:
             self.current_streak = 0
             self.feedback_label.configure(
-                text=f"Wrong answer was {self.current_answer}", text_color=RED)
+                text=f"Wrong, answer was {self.current_answer}", text_color=RED)
 
         self.score_label.configure(text=str(self.score))
         self.load_next_question()

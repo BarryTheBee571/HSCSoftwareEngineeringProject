@@ -2,7 +2,6 @@
 import auth
 from styles import BLUE, GREEN, RED, WHITE, CARD, MUTED
 
-
 class LoginFrame(ctk.CTkFrame):
 
     def __init__(self, app):
@@ -33,10 +32,10 @@ class LoginFrame(ctk.CTkFrame):
         weight = "bold" if bold else "normal"
         lbl = ctk.CTkLabel(
             parent, text=text,
-            font=("Time New Roman", self.scale_value(size), weight),
+            font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Time New Roman", size, weight))
+        self._scalable.append((lbl, "Comic Sans MS", size, weight))
         return lbl
 
     def create_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -44,16 +43,16 @@ class LoginFrame(ctk.CTkFrame):
             parent, text=text, command=cmd,
             fg_color=fg, hover_color=self.lighten_color(fg),
             text_color=text_color,
-            font=("Time New Roman", self.scale_value(14), "bold"),
+            font=("Comic Sans MS", self.scale_value(14), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Time New Roman", 14, "bold"))
+        self._scalable.append((btn, "Comic Sans MS", 14, "bold"))
         return btn
 
     def create_entry(self, parent, placeholder, show=""):
         entry = ctk.CTkEntry(
             parent,
-            font=("Time New Roman", self.scale_value(13), "normal"),
+            font=("Comic Sans MS", self.scale_value(13), "normal"),
             width=self.scale_value(260), height=self.scale_value(42),
             fg_color=WHITE, border_color=BLUE, border_width=2,
             text_color=BLUE, placeholder_text=placeholder,
@@ -61,7 +60,7 @@ class LoginFrame(ctk.CTkFrame):
             show=show,
             corner_radius=8,
         )
-        self._scalable.append((entry, "Time New Roman", 13, "normal"))
+        self._scalable.append((entry, "Comic Sans MS", 13, "normal"))
         return entry
 
     def build_ui(self):
@@ -87,24 +86,24 @@ class LoginFrame(ctk.CTkFrame):
             command=lambda: self.switch_authentication_mode("login"),
             fg_color=BLUE, text_color=WHITE,
             hover_color=self.lighten_color(BLUE),
-            font=("Time New Roman", self.scale_value(13), "bold"),
+            font=("Comic Sans MS", self.scale_value(13), "bold"),
             corner_radius=8, width=self.scale_value(120), height=self.scale_value(36),
             border_width=1, border_color=BLUE,
         )
         self._login_tab_btn.pack(side="left", padx=4)
-        self._scalable.append((self._login_tab_btn, "Time New Roman", 13, "bold"))
+        self._scalable.append((self._login_tab_btn, "Comic Sans MS", 13, "bold"))
 
         self._reg_tab_btn = ctk.CTkButton(
             tab_row, text="Sign Up",
             command=lambda: self.switch_authentication_mode("register"),
             fg_color=WHITE, text_color=BLUE,
             hover_color=self.lighten_color(WHITE),
-            font=("Time New Roman", self.scale_value(13), "bold"),
+            font=("Comic Sans MS", self.scale_value(13), "bold"),
             corner_radius=8, width=self.scale_value(120), height=self.scale_value(36),
             border_width=1, border_color=BLUE,
         )
         self._reg_tab_btn.pack(side="left", padx=4)
-        self._scalable.append((self._reg_tab_btn, "Time New Roman", 13, "bold"))
+        self._scalable.append((self._reg_tab_btn, "Comic Sans MS", 13, "bold"))
 
         card = ctk.CTkFrame(self, fg_color=CARD, corner_radius=14)
         card.grid(row=2, column=0, padx=60, pady=16, sticky="nsew")
@@ -155,13 +154,13 @@ class LoginFrame(ctk.CTkFrame):
             command=self.toggle_password_visibility,
             fg_color=WHITE, text_color=BLUE,
             hover_color=self.lighten_color(WHITE),
-            font=("Time New Roman", self.scale_value(11), "normal"),
+            font=("Comic Sans MS", self.scale_value(11), "normal"),
             width=self.scale_value(140), height=self.scale_value(24),
             border_width=1, border_color=BLUE,
             corner_radius=4,
         )
         self._pw_toggle.grid(row=5, column=0, padx=30, pady=(0, 4), sticky="w")
-        self._scalable.append((self._pw_toggle, "Time New Roman", 11, "normal"))
+        self._scalable.append((self._pw_toggle, "Comic Sans MS", 11, "normal"))
 
         self.msg_label = self.create_label(card, "", size=12, color=RED)
         self.msg_label.grid(row=6, column=0, pady=(2, 4))

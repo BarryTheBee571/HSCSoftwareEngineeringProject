@@ -5,16 +5,13 @@ import secrets
 
 USERS_FILE = os.path.join(os.path.dirname(__file__), "users.json")
 
-
 def build_empty_accuracy_bucket():
     return {
         "tests": 0,
         "correct": 0,
         "answered": 0,
-        "accuracy_sum": 0.0,
         "average_accuracy": 0.0,
     }
-
 
 def ensure_user_stats_shape(user):
     user.setdefault("high_score", 0)
@@ -42,7 +39,6 @@ def ensure_user_stats_shape(user):
     for mode in ["addition", "subtraction", "multiplication", "division", "mixed"]:
         game_mode_stats.setdefault(mode, build_empty_accuracy_bucket())
 
-
 def get_time_mode_key(time_limit):
     if time_limit is None:
         return "unknown"
@@ -50,17 +46,13 @@ def get_time_mode_key(time_limit):
         return "unlimited"
     return str(time_limit)
 
-
 def update_accuracy_bucket(bucket, correct, total_answered):
-    accuracy = (correct / total_answered * 100) if total_answered > 0 else 0.0
     bucket["tests"] += 1
     bucket["correct"] += correct
     bucket["answered"] += total_answered
-    bucket["accuracy_sum"] += accuracy
     bucket["average_accuracy"] = (
-        bucket["accuracy_sum"] / bucket["tests"] if bucket["tests"] > 0 else 0.0
+        bucket["correct"] / bucket["answered"] * 100 if bucket["answered"] > 0 else 0.0
     )
-
 
 def load_users():
     if not os.path.exists(USERS_FILE):
@@ -71,15 +63,12 @@ def load_users():
         except (json.JSONDecodeError, ValueError):
             return {}
 
-
 def save_users(users):
     with open(USERS_FILE, "w") as f:
         json.dump(users, f, indent=4)
 
-
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
-
 
 def register(username, password):
     if len(username.strip()) < 3:
@@ -137,7 +126,6 @@ def register(username, password):
     save_users(users)
     return True, token
 
-
 def login(username, password):
     users = load_users()
 
@@ -152,7 +140,6 @@ def login(username, password):
     save_users(users)
     return True, token
 
-
 def get_user(username):
     users = load_users()
     user = users.get(username)
@@ -160,7 +147,6 @@ def get_user(username):
         return None
     ensure_user_stats_shape(user)
     return user
-
 
 def record_test_started(username, mode):
     users = load_users()
@@ -179,7 +165,6 @@ def record_test_started(username, mode):
         )
 
     save_users(users)
-
 
 def update_stats(
     username,
@@ -222,7 +207,6 @@ def update_stats(
         user["high_score"] = score
 
     save_users(users)
-
 
 def get_high_score(username):
     user = get_user(username)

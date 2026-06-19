@@ -2,7 +2,6 @@ import customtkinter as ctk
 import auth
 from styles import BLUE, GREEN, RED, WHITE, CARD, MUTED
 
-
 class ResultsFrame(ctk.CTkFrame):
 
     def __init__(self, app, score, correct, total, mode, difficulty, time_limit, time_spent_seconds, longest_streak_in_test):
@@ -55,10 +54,10 @@ class ResultsFrame(ctk.CTkFrame):
         weight = "bold" if bold else "normal"
         lbl = ctk.CTkLabel(
             parent, text=text,
-            font=("Time New Roman", self.scale_value(size), weight),
+            font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Time New Roman", size, weight))
+        self._scalable.append((lbl, "Comic Sans MS", size, weight))
         return lbl
 
     def create_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -66,10 +65,10 @@ class ResultsFrame(ctk.CTkFrame):
             parent, text=text, command=cmd,
             fg_color=fg, hover_color=self.lighten_color(fg),
             text_color=text_color,
-            font=("Time New Roman", self.scale_value(15), "bold"),
+            font=("Comic Sans MS", self.scale_value(15), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Time New Roman", 15, "bold"))
+        self._scalable.append((btn, "Comic Sans MS", 15, "bold"))
         return btn
 
     def build_ui(self):
@@ -83,11 +82,8 @@ class ResultsFrame(ctk.CTkFrame):
         hdr.grid(row=0, column=0, sticky="ew")
         hdr.grid_columnconfigure(0, weight=1)
 
-        heading, sub = self.generate_result_message()
-        self.create_label(hdr, heading, size=26, bold=True, color=BLUE).grid(
-            row=0, column=0, pady=(18, 4))
-        self.create_label(hdr, sub, size=12, color=MUTED).grid(
-            row=1, column=0, pady=(0, 14))
+        self.create_label(hdr, "Results", size=26, bold=True, color=BLUE).grid(
+            row=0, column=0, pady=18)
 
         if self.app.current_user:
             self.show_new_highscore_if_applicable()
@@ -130,18 +126,6 @@ class ResultsFrame(ctk.CTkFrame):
             btn_row, "Main Menu", self.app.show_menu,
             fg=CARD, text_color=BLUE, width=165, height=46,
         ).pack(side="left", padx=10)
-
-    def generate_result_message(self):
-        if self.total == 0:
-            return "Round Over!", "No questions answered"
-        if self.accuracy >= 90:
-            return "Amazing!", f"{self.score} points — nearly perfect!"
-        elif self.accuracy >= 70:
-            return "Great Work!", f"{self.score} points — keep it up!"
-        elif self.accuracy >= 50:
-            return "Not Bad!", f"{self.score} points — keep practising!"
-        else:
-            return "Round Over!", f"{self.score} points — try again!"
 
     def show_new_highscore_if_applicable(self):
         if not self.app.current_user:

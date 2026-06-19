@@ -2,7 +2,6 @@
 import auth
 from styles import BLUE, GREEN, RED, WHITE, CARD, MUTED
 
-
 class MenuFrame(ctk.CTkFrame):
 
     def __init__(self, app):
@@ -20,17 +19,7 @@ class MenuFrame(ctk.CTkFrame):
         return self.app.scale_value(base)
 
     def get_difficulty_options(self):
-        mode = self.mode.get()
-        if mode == "addition":
-            return [("Easy (1-20)", "easy"), ("Medium (1-50)", "medium"), ("Hard (1-100)", "hard")]
-        elif mode == "subtraction":
-            return [("Easy (1-20)", "easy"), ("Medium (1-50)", "medium"), ("Hard (1-100)", "hard")]
-        elif mode == "multiplication":
-            return [("Easy (1-10)", "easy"), ("Medium (1-20)", "medium"), ("Hard (1-50)", "hard")]
-        elif mode == "division":
-            return [("Easy (1-10)", "easy"), ("Medium (1-20)", "medium"), ("Hard (1-50)", "hard")]
-        else:
-            return [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
+        return [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
 
     def handle_mode_change(self, *args):
         if hasattr(self, '_diff_frame'):
@@ -56,10 +45,10 @@ class MenuFrame(ctk.CTkFrame):
         weight = "bold" if bold else "normal"
         lbl = ctk.CTkLabel(
             parent, text=text,
-            font=("Times New Roman", self.scale_value(size), weight),
+            font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Times New Roman", size, weight))
+        self._scalable.append((lbl, "Comic Sans MS", size, weight))
         return lbl
 
     def create_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -67,10 +56,10 @@ class MenuFrame(ctk.CTkFrame):
             parent, text=text, command=cmd,
             fg_color=fg, hover_color=self.lighten_color(fg),
             text_color=text_color,
-            font=("Times New Roman", self.scale_value(15), "bold"),
+            font=("Comic Sans MS", self.scale_value(15), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Times New Roman", 15, "bold"))
+        self._scalable.append((btn, "Comic Sans MS", 15, "bold"))
         return btn
 
     def create_toggle_buttons(self, parent, options, variable):
@@ -94,13 +83,13 @@ class MenuFrame(ctk.CTkFrame):
                 fg_color=BLUE if active else WHITE,
                 text_color=WHITE if active else BLUE,
                 hover_color=self.lighten_color(BLUE) if active else self.lighten_color(WHITE),
-                font=("Times New Roman", self.scale_value(12), "normal"),
+                font=("Comic Sans MS", self.scale_value(12), "normal"),
                 corner_radius=8, height=self.scale_value(36),
                 border_width=1, border_color=BLUE,
             )
             btn.grid(row=0, column=col, padx=3, pady=4, sticky="ew")
             parent.grid_columnconfigure(col, weight=1)
-            self._scalable.append((btn, "Times New Roman", 12, "normal"))
+            self._scalable.append((btn, "Comic Sans MS", 12, "normal"))
             buttons[val] = btn
 
         return buttons
@@ -197,8 +186,18 @@ class MenuFrame(ctk.CTkFrame):
             info = ctk.CTkFrame(header, fg_color="transparent")
             info.grid(row=0, column=1, padx=16, pady=10, sticky="e")
 
-            self.create_label(info, f"{self.app.current_user}",
-                        size=12, bold=True, color=BLUE).pack(anchor="e")
+            profile_btn = ctk.CTkButton(
+                info, text=self.app.current_user,
+                command=self.app.show_stats,
+                fg_color=WHITE, text_color=BLUE,
+                hover_color=self.lighten_color(WHITE),
+                font=("Comic Sans MS", self.scale_value(12), "bold"),
+                width=self.scale_value(130), height=self.scale_value(26),
+                border_width=1, border_color=BLUE,
+                corner_radius=6,
+            )
+            profile_btn.pack(anchor="e")
+            self._scalable.append((profile_btn, "Comic Sans MS", 12, "bold"))
             self.create_label(info, f"Best: {high_score} pts",
                         size=11, color=MUTED).pack(anchor="e")
 
@@ -207,13 +206,13 @@ class MenuFrame(ctk.CTkFrame):
                 command=self.logout_user,
                 fg_color=WHITE, text_color=BLUE,
                 hover_color=self.lighten_color(WHITE),
-                font=("Times New Roman", self.scale_value(10), "normal"),
+                font=("Comic Sans MS", self.scale_value(10), "normal"),
                 width=self.scale_value(60), height=self.scale_value(22),
                 border_width=1, border_color=BLUE,
                 corner_radius=4,
             )
             logout_btn.pack(anchor="e", pady=(2, 0))
-            self._scalable.append((logout_btn, "Times New Roman", 10, "normal"))
+            self._scalable.append((logout_btn, "Comic Sans MS", 10, "normal"))
         else:
             
             login_btn = ctk.CTkButton(
@@ -221,13 +220,13 @@ class MenuFrame(ctk.CTkFrame):
                 command=self.app.show_login,
                 fg_color=WHITE, text_color=BLUE,
                 hover_color=self.lighten_color(WHITE),
-                font=("Times New Roman", self.scale_value(12), "bold"),
+                font=("Comic Sans MS", self.scale_value(12), "bold"),
                 width=self.scale_value(70), height=self.scale_value(30),
                 border_width=1, border_color=BLUE,
                 corner_radius=6,
             )
             login_btn.grid(row=0, column=1, padx=16, pady=10)
-            self._scalable.append((login_btn, "Times New Roman", 12, "bold"))
+            self._scalable.append((login_btn, "Comic Sans MS", 12, "bold"))
 
     def logout_user(self):
         self.app.current_user = None
