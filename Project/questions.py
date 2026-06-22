@@ -1,50 +1,57 @@
 ﻿import random
 
-def generate_question(mode, difficulty):
+def make_question(mode, difficulty):
+    """Return one math question string + integer answer."""
+    if difficulty not in ("easy", "medium", "hard"):
+        raise ValueError(f"Invalid difficulty: {difficulty}")  # block unexpected difficulty values
     if mode == "mixed":
-        mode = random.choice(["addition", "subtraction", "multiplication", "division"])
-        return _generate_by_mode(mode, difficulty)
-    else:
-        return _generate_by_mode(mode, difficulty)
+        mode = random.choice(["addition", "subtraction", "multiplication", "division"])  # randomize mode
+    return _make_by_mode(mode, difficulty)  # build question for chosen mode
 
-def _generate_by_mode(mode, difficulty):
+def _make_by_mode(mode, difficulty):
+    """Route to the matching question builder."""
     if mode == "addition":
-        return _generate_addition(difficulty)
+        return _make_addition_q(difficulty)
     elif mode == "subtraction":
-        return _generate_subtraction(difficulty)
+        return _make_subtraction_q(difficulty)
     elif mode == "multiplication":
-        return _generate_multiplication(difficulty)
+        return _make_multiplication_q(difficulty)
     elif mode == "division":
-        return _generate_division(difficulty)
+        return _make_division_q(difficulty)
+    raise ValueError(f"Invalid mode: {mode}")  # fail fast on bad mode input
 
-def _generate_addition(difficulty):
-    answer_ranges = {"easy": (1, 20), "medium": (1, 50), "hard": (1, 100)}
-    lo, hi = answer_ranges[difficulty]
-    answer = random.randint(max(2, lo), hi)
-    a = random.randint(1, answer - 1)
-    b = answer - a
-    return f"{a} + {b}", answer
+def _make_addition_q(difficulty):
+    """Generate addition where result stays in the selected range."""
+    answer_ranges = {"easy": (1, 20), "medium": (1, 50), "hard": (1, 100)}  # target result ranges
+    lo, hi = answer_ranges[difficulty]  # pick range from difficulty
+    answer = random.randint(max(2, lo), hi)  # avoid too-small answers
+    a = random.randint(1, answer - 1)  # first number
+    b = answer - a  # second number gives exact answer
+    return f"{a} + {b}", answer  # show text + true answer
 
-def _generate_subtraction(difficulty):
-    operand_ranges = {"easy": (1, 20), "medium": (1, 50), "hard": (1, 100)}
-    lo, hi = operand_ranges[difficulty]
-    b = random.randint(lo, hi)
-    a = random.randint(b, hi)
-    answer = a - b
-    return f"{a} - {b}", answer
+def _make_subtraction_q(difficulty):
+    """Generate subtraction with no negative results."""
+    operand_ranges = {"easy": (1, 20), "medium": (1, 50), "hard": (1, 100)}  # number ranges
+    lo, hi = operand_ranges[difficulty]  # pick range by difficulty
+    b = random.randint(lo, hi)  # subtractor
+    a = random.randint(b, hi)  # make sure a >= b
+    answer = a - b  # non-negative result
+    return f"{a} - {b}", answer  # show text + true answer
 
-def _generate_multiplication(difficulty):
-    operand_ranges = {"easy": (1, 10), "medium": (1, 20), "hard": (1, 50)}
-    lo, hi = operand_ranges[difficulty]
-    a = random.randint(lo, hi)
-    b = random.randint(lo, hi)
-    answer = a * b
-    return f"{a} x {b}", answer
+def _make_multiplication_q(difficulty):
+    """Generate multiplication based on difficulty."""
+    operand_ranges = {"easy": (1, 10), "medium": (1, 20), "hard": (1, 50)}  # number ranges
+    lo, hi = operand_ranges[difficulty]  # pick range by difficulty
+    a = random.randint(lo, hi)  # first factor
+    b = random.randint(lo, hi)  # second factor
+    answer = a * b  # multiply factors
+    return f"{a} x {b}", answer  # show text + true answer
 
-def _generate_division(difficulty):
-    answer_ranges = {"easy": (1, 10), "medium": (1, 20), "hard": (1, 50)}
-    lo, hi = answer_ranges[difficulty]
-    answer = random.randint(lo, hi)
-    b = random.randint(1, 12)
-    a = answer * b
-    return f"{a} ÷ {b}", answer
+def _make_division_q(difficulty):
+    """Generate division that always has a whole-number answer."""
+    answer_ranges = {"easy": (1, 10), "medium": (1, 20), "hard": (1, 50)}  # result ranges
+    lo, hi = answer_ranges[difficulty]  # pick range by difficulty
+    answer = random.randint(lo, hi)  # final integer answer
+    b = random.randint(1, 12)  # divisor
+    a = answer * b  # dividend chosen to divide cleanly
+    return f"{a} ÷ {b}", answer  # show text + true answer
