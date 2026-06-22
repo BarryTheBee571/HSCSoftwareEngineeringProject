@@ -8,14 +8,14 @@ class LeaderboardFrame(ctk.CTkFrame):
     def __init__(self, app):
         super().__init__(app, fg_color=WHITE, corner_radius=0)  # base frame init
         self.app = app  # app reference for navigation
-        self._scalable = []  # widgets that need font scaling
+        self.scalable = []  # widgets that need font scaling
         self.setup_ui()  # build page widgets
 
     def scale_value(self, base):
         return self.app.scale_value(base)  # delegate scaling to app
 
     def refresh_scaling(self):
-        for widget, family, base_size, weight in self._scalable:
+        for widget, family, base_size, weight in self.scalable:
             try:
                 widget.configure(font=(family, max(8, self.scale_value(base_size)), weight))
             except Exception:
@@ -30,7 +30,7 @@ class LeaderboardFrame(ctk.CTkFrame):
             text_color=color,
             **kw,
         )
-        self._scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resize
+        self.scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resize
         return lbl  # return built label
 
     def make_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=150, height=36):
@@ -45,7 +45,7 @@ class LeaderboardFrame(ctk.CTkFrame):
             width=self.scale_value(width),
             height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Comic Sans MS", 13, "bold"))  # track for resize
+        self.scalable.append((btn, "Comic Sans MS", 13, "bold"))  # track for resize
         return btn  # return built button
 
     def format_time(self, total_seconds):

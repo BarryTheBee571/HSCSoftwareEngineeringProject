@@ -16,7 +16,7 @@ class ResultsFrame(ctk.CTkFrame):
         self.time_limit = time_limit  # timer setting used
         self.time_spent_seconds = time_spent_seconds  # actual time spent
         self.longest_streak_in_test = longest_streak_in_test  # best streak in this run
-        self._scalable = []  # widgets that need font scaling
+        self.scalable = []  # widgets that need font scaling
 
         # Guard divide-by-zero if player ran out of time early.
         self.accuracy = (correct / total * 100) if total > 0 else 0  # computed accuracy percent
@@ -40,7 +40,7 @@ class ResultsFrame(ctk.CTkFrame):
         return self.app.scale_value(base)  # delegate scaling to app
 
     def refresh_scaling(self):
-        for widget, family, base_size, weight in self._scalable:
+        for widget, family, base_size, weight in self.scalable:
             try:
                 widget.configure(font=(family, max(8, self.scale_value(base_size)), weight))
             except Exception:
@@ -53,7 +53,7 @@ class ResultsFrame(ctk.CTkFrame):
             font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resize
+        self.scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resize
         return lbl  # return built label
 
     def make_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -64,7 +64,7 @@ class ResultsFrame(ctk.CTkFrame):
             font=("Comic Sans MS", self.scale_value(15), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Comic Sans MS", 15, "bold"))  # track for resize
+        self.scalable.append((btn, "Comic Sans MS", 15, "bold"))  # track for resize
         return btn  # return built button
 
     def setup_ui(self):

@@ -8,7 +8,7 @@ class MenuFrame(ctk.CTkFrame):
     def __init__(self, app):
         super().__init__(app, fg_color=WHITE, corner_radius=0)  # base frame init
         self.app = app  # app reference for navigation
-        self._scalable = []  # widgets that need font scaling
+        self.scalable = []  # widgets that need font scaling
         self.mode = ctk.StringVar()  # selected game mode
         self.difficulty = ctk.StringVar()  # selected difficulty
         self.time_limit = ctk.IntVar()  # selected time limit
@@ -25,14 +25,14 @@ class MenuFrame(ctk.CTkFrame):
 
     def on_mode_change(self, *args):
         """Rebuild difficulty row if mode changes."""
-        if hasattr(self, '_diff_frame'):
-            for widget in self._diff_frame.winfo_children():
+        if hasattr(self, 'diff_frame'):
+            for widget in self.diff_frame.winfo_children():
                 widget.destroy()  # clear old difficulty row
             DIFFS = self.get_diff_choices()
-            self.make_toggle_buttons(self._diff_frame, DIFFS, self.difficulty)
+            self.make_toggle_buttons(self.diff_frame, DIFFS, self.difficulty)
 
     def refresh_scaling(self):
-        for widget, family, base_size, weight in self._scalable:
+        for widget, family, base_size, weight in self.scalable:
             try:
                 widget.configure(font=(family, max(8, self.scale_value(base_size)), weight))
             except Exception:
@@ -45,7 +45,7 @@ class MenuFrame(ctk.CTkFrame):
             font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resize
+        self.scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resize
         return lbl  # return built label
 
     def make_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -56,7 +56,7 @@ class MenuFrame(ctk.CTkFrame):
             font=("Comic Sans MS", self.scale_value(15), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Comic Sans MS", 15, "bold"))  # track for resize
+        self.scalable.append((btn, "Comic Sans MS", 15, "bold"))  # track for resize
         return btn  # return built button
 
     def make_toggle_buttons(self, parent, options, variable):
@@ -86,7 +86,7 @@ class MenuFrame(ctk.CTkFrame):
             )
             btn.grid(row=0, column=col, padx=3, pady=4, sticky="ew")
             parent.grid_columnconfigure(col, weight=1)  # even spacing
-            self._scalable.append((btn, "Comic Sans MS", 12, "normal"))
+            self.scalable.append((btn, "Comic Sans MS", 12, "normal"))
             buttons[val] = btn
 
         return buttons
@@ -165,11 +165,11 @@ class MenuFrame(ctk.CTkFrame):
         self.make_label(dc, "Difficulty", size=14, bold=True, color=BLUE).grid(
             row=0, column=0, padx=20, pady=(12, 4), sticky="w")
 
-        self._diff_frame = ctk.CTkFrame(dc, fg_color="transparent")  # dynamic diff row holder
-        self._diff_frame.grid(row=1, column=0, padx=14, pady=(0, 12), sticky="nsew")
+        self.diff_frame = ctk.CTkFrame(dc, fg_color="transparent")  # dynamic diff row holder
+        self.diff_frame.grid(row=1, column=0, padx=14, pady=(0, 12), sticky="nsew")
 
         DIFFS = self.get_diff_choices()
-        self.make_toggle_buttons(self._diff_frame, DIFFS, self.difficulty)
+        self.make_toggle_buttons(self.diff_frame, DIFFS, self.difficulty)
 
         self.error_label = self.make_label(self, "", size=12, color=RED)
         self.error_label.grid(row=5, column=0, pady=(8, 0))
@@ -195,7 +195,7 @@ class MenuFrame(ctk.CTkFrame):
                 corner_radius=6,
             )
             profile_btn.pack(anchor="e")
-            self._scalable.append((profile_btn, "Comic Sans MS", 12, "bold"))
+            self.scalable.append((profile_btn, "Comic Sans MS", 12, "bold"))
             self.make_label(info, f"Best: {high_score} pts",
                         size=11, color=MUTED).pack(anchor="e")
 
@@ -212,7 +212,7 @@ class MenuFrame(ctk.CTkFrame):
                 corner_radius=4,
             )
             leaderboard_btn.pack(side="left", padx=(0, 6))
-            self._scalable.append((leaderboard_btn, "Comic Sans MS", 10, "normal"))
+            self.scalable.append((leaderboard_btn, "Comic Sans MS", 10, "normal"))
 
             logout_btn = ctk.CTkButton(
                 actions, text="Log out",
@@ -224,7 +224,7 @@ class MenuFrame(ctk.CTkFrame):
                 corner_radius=4,
             )
             logout_btn.pack(side="left")
-            self._scalable.append((logout_btn, "Comic Sans MS", 10, "normal"))
+            self.scalable.append((logout_btn, "Comic Sans MS", 10, "normal"))
         else:
             
             login_btn = ctk.CTkButton(
@@ -237,7 +237,7 @@ class MenuFrame(ctk.CTkFrame):
                 corner_radius=6,
             )
             login_btn.grid(row=0, column=1, padx=16, pady=10)
-            self._scalable.append((login_btn, "Comic Sans MS", 12, "bold"))
+            self.scalable.append((login_btn, "Comic Sans MS", 12, "bold"))
 
     def log_out(self):
         self.app.current_user = None  # clear active user

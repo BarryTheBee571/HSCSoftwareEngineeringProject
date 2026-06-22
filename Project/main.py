@@ -17,8 +17,8 @@ class App(ctk.CTk):
         self.current_user = None  # username string if logged in
         self.session_token = None  # auth token from login/register
 
-        self._current_frame = None  # currently visible page frame
-        self._resize_id = None  # id for resize debounce timer
+        self.current_frame = None  # currently visible page frame
+        self.resize_id = None  # id for resize debounce timer
 
         self.bind("<Configure>", self.on_window_resize)  # resize/move callback
 
@@ -30,7 +30,7 @@ class App(ctk.CTk):
             self.state("zoomed")  # Windows maximized state
         except Exception:
             pass  # ignore platform-specific failures
-        if self._current_frame is None:
+        if self.current_frame is None:
             self.show_login()  # initial page
 
     def get_scale_factor(self):
@@ -47,25 +47,25 @@ class App(ctk.CTk):
         """Debounce resize events so it does not rescale every single pixel step."""
         if event.widget is not self:
             return  # ignore child widget configure events
-        if self._resize_id:
-            self.after_cancel(self._resize_id)  # cancel previous pending refresh
-        self._resize_id = self.after(50, self.refresh_scaling)  # delay to debounce
+        if self.resize_id:
+            self.after_cancel(self.resize_id)  # cancel previous pending refresh
+        self.resize_id = self.after(50, self.refresh_scaling)  # delay to debounce
 
     def refresh_scaling(self):
         """Tell the current frame to update its fonts/sizing."""
-        if not self._current_frame:
+        if not self.current_frame:
             return  # nothing mounted yet
-        if hasattr(self._current_frame, "refresh_scaling"):
-            self._current_frame.refresh_scaling()  # new method name
-        elif hasattr(self._current_frame, "apply_scaling"):
-            self._current_frame.apply_scaling()  # compatibility fallback
+        if hasattr(self.current_frame, "refresh_scaling"):
+            self.current_frame.refresh_scaling()  # new method name
+        elif hasattr(self.current_frame, "apply_scaling"):
+            self.current_frame.apply_scaling()  # compatibility fallback
 
     def swap_frame(self, frame):
         """Destroy previous frame and show the new one."""
         # one frame visible at a time keeps navigation simple
-        if self._current_frame:
-            self._current_frame.destroy()  # remove old page widgets
-        self._current_frame = frame  # save new page reference
+        if self.current_frame:
+            self.current_frame.destroy()  # remove old page widgets
+        self.current_frame = frame  # save new page reference
         frame.pack(fill="both", expand=True)  # show new page full window
 
     def show_login(self):

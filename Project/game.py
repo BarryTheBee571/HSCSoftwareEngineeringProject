@@ -12,8 +12,8 @@ class GameFrame(ctk.CTkFrame):
         self.difficulty = difficulty  # selected difficulty
         self.time_limit = time_limit  # timer length in seconds
         self.unlimited = time_limit < 0  # -1 means endless mode
-        self._scalable = []  # widgets that need font scaling
-        self._timer_id = None  # after() id for timer callback
+        self.scalable = []  # widgets that need font scaling
+        self.timer_id = None  # after() id for timer callback
         self.score = 0  # points in current run
         self.questions_answered = 0  # total answered in this run
         self.correct_answers = 0  # correct answers in this run
@@ -30,7 +30,7 @@ class GameFrame(ctk.CTkFrame):
         return self.app.scale_value(base)  # delegate scaling to app
 
     def refresh_scaling(self):
-        for widget, family, base_size, weight in self._scalable:
+        for widget, family, base_size, weight in self.scalable:
             try:
                 widget.configure(font=(family, max(8, self.scale_value(base_size)), weight))  # resize font
             except Exception:
@@ -43,7 +43,7 @@ class GameFrame(ctk.CTkFrame):
             font=("Comic Sans MS", self.scale_value(size), weight),
             text_color=color, **kw,
         )
-        self._scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resizing
+        self.scalable.append((lbl, "Comic Sans MS", size, weight))  # track for resizing
         return lbl  # hand label back to caller
 
     def make_button(self, parent, text, cmd, fg=BLUE, text_color=WHITE, width=180, height=44):
@@ -54,7 +54,7 @@ class GameFrame(ctk.CTkFrame):
             font=("Comic Sans MS", self.scale_value(15), "bold"),
             corner_radius=10, width=self.scale_value(width), height=self.scale_value(height),
         )
-        self._scalable.append((btn, "Comic Sans MS", 15, "bold"))  # track for resizing
+        self.scalable.append((btn, "Comic Sans MS", 15, "bold"))  # track for resizing
         return btn  # hand button back
 
     def setup_ui(self):
@@ -79,7 +79,7 @@ class GameFrame(ctk.CTkFrame):
             border_width=1, border_color=BLUE,
             corner_radius=6, width=self.scale_value(60), height=self.scale_value(32),)
         back_btn.grid(row=0, column=0, padx=8, pady=8)
-        self._scalable.append((back_btn, "Comic Sans MS", 11, "normal"))
+        self.scalable.append((back_btn, "Comic Sans MS", 11, "normal"))
 
         left = ctk.CTkFrame(sb, fg_color="transparent")  # timer column
         left.grid(row=0, column=1, padx=20, pady=10)
@@ -116,7 +116,7 @@ class GameFrame(ctk.CTkFrame):
         self.answer_entry.grid(row=2, column=0, pady=16)
         self.answer_entry.bind("<Return>", self.submit_answer)
         self.answer_entry.focus()
-        self._scalable.append((self.answer_entry, "Comic Sans MS", 28, "bold"))
+        self.scalable.append((self.answer_entry, "Comic Sans MS", 28, "bold"))
 
         controls = ctk.CTkFrame(self, fg_color="transparent")  # submit/end row
         controls.grid(row=3, column=0)
@@ -139,7 +139,7 @@ class GameFrame(ctk.CTkFrame):
         if self.unlimited:
             secs = int(elapsed)  # count up in endless mode
             self.timer_label.configure(text=str(secs), text_color=GREEN)
-            self._timer_id = self.after(200, self.tick_timer)  # schedule next tick
+            self.timer_id = self.after(200, self.tick_timer)  # schedule next tick
             return
 
         # Timed modes count down from selected time.
@@ -151,7 +151,7 @@ class GameFrame(ctk.CTkFrame):
         secs = int(remaining)  # whole seconds left
         colour = RED if secs <= 10 else (MUTED if secs <= 20 else GREEN)  # color urgency
         self.timer_label.configure(text=str(secs), text_color=colour)
-        self._timer_id = self.after(200, self.tick_timer)  # continue ticking
+        self.timer_id = self.after(200, self.tick_timer)  # continue ticking
 
     def next_question(self):
         """Load and show the next generated question."""
@@ -190,15 +190,15 @@ class GameFrame(ctk.CTkFrame):
         self.next_question()  # move to next question immediately
 
     def back_to_menu(self):
-        if self._timer_id:
-            self.after_cancel(self._timer_id)  # stop timer callback
-            self._timer_id = None  # clear stored callback id
+        if self.timer_id:
+            self.after_cancel(self.timer_id)  # stop timer callback
+            self.timer_id = None  # clear stored callback id
         self.app.show_menu()  # navigate away
 
     def end_game(self):
-        if self._timer_id:
-            self.after_cancel(self._timer_id)  # stop timer callback
-            self._timer_id = None  # clear stored callback id
+        if self.timer_id:
+            self.after_cancel(self.timer_id)  # stop timer callback
+            self.timer_id = None  # clear stored callback id
 
         elapsed_seconds = time.time() - self.start_time  # final run duration
 

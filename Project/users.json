@@ -1,16 +1,16 @@
 {
     "1234": {
         "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-        "token": "d2a67d62a9300f292f5b1618a2b1a963",
+        "token": "42ec60b9c03241a8ee7d453df282bed9",
         "high_score": 470,
         "games_played": 20,
         "total_correct": 267,
         "total_answered": 275,
-        "tests_started": 27,
+        "tests_started": 28,
         "total_time_spent_seconds": 463,
         "longest_unlimited_streak": 31,
         "mode_counts": {
-            "addition": 11,
+            "addition": 12,
             "subtraction": 4,
             "multiplication": 7,
             "division": 3,
