@@ -159,6 +159,8 @@ Human input from friends and teacher will be used to identify usability issues a
 | accountRecord | Record | Stores the full set of account information for a user |
 | scoreRecord | Record | Stores saved score and performance information for a user |
 
+Updated Data Dictionary at 7.2
+
 ---
 ### **3.6 UML Class Diagram**
 ![UML Class Diagram](<Theory/UML Class Diagram.png>)
@@ -228,7 +230,22 @@ Testing improved the final solution by revealing practical issues such as invali
 ---
 ### **5.2 Test Cases and Results**
 
-FILL
+| Test ID | Feature tested | Test steps | Expected result | Actual result | Status |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| TC01 | Register new user (valid data) | Open Sign Up, enter username with at least 3 chars and password with at least 4 chars, submit. | Account is created, session token is generated, user is redirected to menu. | Account created successfully and user entered menu. | Pass |
+| TC02 | Register with duplicate username | Try to register with an existing username. | Registration is blocked with "Username already taken" message. | Duplicate account was rejected with correct message. | Pass |
+| TC03 | Register with invalid username/password | Try username shorter than 3 chars, username containing spaces, or password shorter than 4 chars. | Registration is blocked with validation message for each invalid input. | Invalid inputs were rejected with correct messages. | Pass |
+| TC04 | Login with valid credentials | Open Login, enter existing username and correct password, submit. | Login succeeds, token refreshes, user is redirected to menu. | Login succeeded and menu opened. | Pass |
+| TC05 | Login with invalid credentials | Try unknown username and wrong password cases. | Login is blocked with "Username not found" or "Incorrect password" message. | Both invalid login cases showed correct error feedback. | Pass |
+| TC06 | Guest mode flow | On login screen, click Continue as Guest and start a game. | Guest can play game but no account statistics are saved. | Gameplay worked as guest and no user stats were written. | Pass |
+| TC07 | Menu selection validation | Attempt Start Game without selecting mode, difficulty, or time. | Start is blocked and clear error message is shown for missing selection. | Validation prevented start and showed correct message. | Pass |
+| TC08 | Question generation by mode/difficulty | Start games across addition, subtraction, multiplication, division, and mixed with easy/medium/hard. | Questions match selected mode and difficulty ranges; division answers are whole numbers. | Generated questions matched mode settings and valid ranges. Division remained whole-number. | Pass |
+| TC09 | Answer input validation | Enter letters/symbols in answer field and submit. | Input is rejected with "Enter a whole number!" and score does not update. | Non-numeric entries were rejected and score unchanged. | Pass |
+| TC10 | Score and streak logic | Submit several correct answers, then one incorrect answer. | Score increases by 10 per correct answer; streak increases on correct and resets on incorrect. | Score and streak behavior matched expected logic. | Pass |
+| TC11 | Timer and end-of-round behavior | Run timed mode until timer expires, then run unlimited mode and press End Game. | Timed game auto-ends at 0 seconds; unlimited mode counts up and ends only when user chooses End Game. | Both timed and unlimited behaviors worked as expected. | Pass |
+| TC12 | Result saving, stats, and leaderboard integration | Complete a logged-in game, then open stats and leaderboard pages. | Game results are saved to users.json, high score updates if beaten, stats totals update, leaderboard sorts by high score. | Data saved correctly, high score updated, and leaderboard ranking reflected saved values. | Pass |
+
+Testing evidence for each case is included in Appendix 7.3 as timestamped logs/screenshots.
 
 ---
 ### **5.3 Evaluation Against Requirements**
@@ -259,16 +276,29 @@ FILL
 
 ---
 
+### **5.5 Evaluation of Social, Ethical, and Communication Issues**
+
+| Area | Evaluation |
+| :---- | :---- |
+| Social impact | The project has a positive social impact because it supports numeracy practice for younger students in a format that is more engaging than worksheets. Features such as selectable game mode, difficulty, and time settings allow learners with different confidence levels to participate. A limitation is that the current design is mainly practice-based and does not explicitly teach problem-solving strategies, so weaker learners may still need teacher or parent guidance. |
+| Accessibility and inclusion | The interface uses large text, simple buttons, and clear screens, which improves accessibility for the target age group. However, accessibility is not fully addressed because there are no audio cues, no dyslexia-focused font option, and no dedicated colour-blind accessibility checks. Future development should include accessibility settings to improve inclusion. |
+| Ethical use of data | User accounts store only basic credentials and game performance data needed for functionality. Passwords are hashed rather than stored as plain text, which is an ethical and safer approach to handling user information. A remaining ethical risk is that data is saved locally in a JSON file without advanced protection, so the system should be used with awareness that it is a school-level prototype, not a production security platform. |
+| Fairness and wellbeing | Scoring and answer checking are rules-based and consistent for all users, which supports fairness. The leaderboard can increase motivation, but it may also create pressure for some students. To manage wellbeing, future versions could include personal progress goals and optional hiding of comparative rankings. |
+| Legal and policy considerations | The project currently operates as an offline educational tool with no online sharing, which reduces privacy and compliance risk. For a wider deployment, legal responsibilities would increase, including parental consent requirements for children, clearer data retention policies, and compliance with school and privacy regulations. |
+| Communication with stakeholders | Peer feedback was collected and used to identify practical improvements, including requests for better engagement, more teaching support, and improved progression. This shows effective communication during development and supports iterative refinement. The communication process could be strengthened further by using a structured feedback form with consistent questions for all testers. |
+
+---
+
 ## <ins> **6. Feedback, Security and Reflection** <ins>
 ---
 ### **6.1 Summary of Client or Peer Feedback**
-
-**Summarise** feedback received and explain how it influenced development.
-
-
-You could collect a **‘PMI’ (Plus, Minus, Implication)** table from **at least three** different people after testing, or **record and summarise an interview** with **at least three** three people who test the software.
-
-FILL
+| Name | Plus | Minus | Implication |
+| :---- | :---- | :---- | :---- |
+| Chris | The maths is a good idea to help you practice skills that you don't use often. Lets you choose how hard the modes are | Not multiplayer | Add easter eggs in the game |
+| Stephen | Barry’s maths application presents different maths types to develop skills, it allows selection of many options | Basic maths for smaller children | Auto select level when login |
+| Shawn | Many options to select from, provides answers if you get it wrong, and is easy to use | Too plain and boring | Add more complex topics but with easy questions (factorisation, etc) |
+| Miles | Where 2 Numbers are added together, as demonstrated by the game. | Where 2 Numbers are taken away from one another, as demonstrated by the game. | I didn’t reach this level |
+| Miles, For Real this time. | The game's UI was really focused, which was a big benefit for this type of educational game, where I am only trying to focus on one task at a time, and reduce the distractions. | I wasn't a fan of the font. And the game sort of fails to ‘teach’ in that sense. It is a practice tool. A way to improve it might be to have lessons or tips for some of the more difficult problems. For example*, notes for “Multiplying by 99, you can multiply by 100 and then take away one of the multiplied values”.* | If I was younger, I would use a tool like this, and I do think it would benefit me in laying a stronger foundation level of Math skills going into high school or even up through parts of high school. But this type of practice does begin to fall short at the much higher level, which is more focused on the process and adjacent thinking of a solution, rather than one calculation. |
 
 ---
 ### **6.2 Secure Software Design and Data Handling**
@@ -292,6 +322,7 @@ Overall, the security approach is appropriate for this project because it demons
 * Software engineering skills developed
 
 * Challenges encountered and how they were overcome
+
 
 ---
 ## <ins> **7. Appendices** <ins>
