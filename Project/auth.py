@@ -50,10 +50,12 @@ def scramble_password(password):
 
 def register(username, password):
     """Create a new user account and return a session token."""
-    if len(username.strip()) < 3:  # stop empty/super short names
-        return False, "Username must be at least 3 characters"  # tell user why
-    if len(password) < 4:  # basic password minimum
-        return False, "Password must be at least 4 characters"  # show clear rule
+    if len(username.strip()) < 4:  # stop empty/super short names
+        return False, "Username must be at least 4 characters"  # tell user why
+    if len(password) < 6:  # basic password minimum
+        return False, "Password must be at least 6 characters"  # show clear rule
+    if not any(char.isdigit() for char in password):  # require one digit
+        return False, "Password must include at least one number"  # strengthen password rule
     if " " in username:  # keep names simple
         return False, "Username can't have spaces"  # validation message
 

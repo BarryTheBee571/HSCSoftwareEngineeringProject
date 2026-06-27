@@ -3,11 +3,11 @@
 ## <ins> **1. Identifying and Defining** <ins>
 
 ### **1.1 Problem Statement**
-Many primary school students struggle to memorise and recall basic mathematical facts quickly, especially multiplication tables. This slows down their progress in more advanced maths topics because they spend too long calculating simple facts instead of applying them. Teachers and parents often lack engaging tools that encourage repeated practice without feeling repetitive or boring. Children themselves may find traditional worksheets unmotivating, leading to reduced practice and weaker long‑term recall.
+Many primary school students struggle to memorise and recall basic mathematical facts quickly, especially multiplication tables. This slows down their progress in more advanced maths topics because they spend too long calculating simple facts instead of applying them. Teachers and parents often lack engaging tools that encourage repeated practice without feeling repetitive or boring. Children themselves may find traditional worksheets unmotivating, leading to reduced practice and weaker long-term recall.
 
-This issue is significant because automatic recall of basic maths facts is a foundational skill. When students cannot answer simple multiplication questions quickly, it affects their confidence, slows their problem‑solving, and can create long‑term gaps in numeracy.
+This issue is significant because automatic recall of basic maths facts is a foundational skill. When students cannot answer simple multiplication questions quickly, it affects their confidence, slows their problem-solving, and can create long-term gaps in numeracy.
 
-A software solution is appropriate because digital games can provide instant feedback, timed challenges, and adaptive difficulty features that are difficult to achieve with physical worksheet methods. A speed‑based maths game can make practice more enjoyable, encourage repeated attempts, and track performance over time, helping students build fluency in a motivating way.
+A software solution is appropriate because digital games can provide instant feedback, timed challenges, and adaptive difficulty features that are difficult to achieve with physical worksheet methods. A speed-based maths game can make practice more enjoyable, encourage repeated attempts, and track performance over time, helping students build fluency in a motivating way.
 
 ---
 ### **1.2 Project Purpose and Boundaries**
@@ -159,8 +159,6 @@ Human input from friends and teacher will be used to identify usability issues a
 | accountRecord | Record | Stores the full set of account information for a user |
 | scoreRecord | Record | Stores saved score and performance information for a user |
 
-Updated Data Dictionary at 7.2
-
 ---
 ### **3.6 UML Class Diagram**
 ![UML Class Diagram](<Theory/UML Class Diagram.png>)
@@ -177,7 +175,7 @@ Object-oriented programming was suitable because the application is screen based
 
 Code reuse was used through helper methods such as `make_label`, `make_button`, `scale_value`, and `refresh_scaling`. These methods keep the interface consistent and reduce repeated code. Shared functions such as `auth.load_users()`, `auth.save_game_stats()`, and `questions.make_question()` are reused across multiple screens. This was a strong engineering choice because repeated code would make the project harder to maintain and more likely to contain inconsistent behaviour.
 
-Validation and error handling were included to improve reliability and user experience. Registration checks username length, password length, duplicate usernames, and spaces in usernames. Login checks account details. The game only accepts whole-number answers. Accuracy calculations avoid division by zero, and `auth.load_users()` handles missing or corrupted JSON data by returning an empty dictionary instead of crashing. These techniques are justified because the target users are children, so the program must recover from mistakes clearly rather than fail unexpectedly.
+Validation and error handling were included to improve reliability and user experience. Registration checks that usernames are at least 4 characters, passwords are at least 6 characters and include a number, duplicate usernames are blocked, and usernames cannot contain spaces. Login checks account details. The game only accepts whole-number answers. Accuracy calculations avoid division by zero, and `auth.load_users()` handles missing or corrupted JSON data by returning an empty dictionary instead of crashing. These techniques are justified because the target users are children, so the program must recover from mistakes clearly rather than fail unexpectedly.
 
 ---
 ### **4.2 Key Features Developed**
@@ -204,10 +202,23 @@ Overall, the back-end engineering was effective because it allowed the program t
 
 ---
 ### **4.4 Screenshots of Interface**
+**Login Page**
+![Login Page](<Theory/Login Page.png>)
 
-Include annotated screenshots explaining how the user interacts with the system.
+**Sign Up Page**
+![Sign Up Page](<Theory/Sign Up Page.png>)
 
-FILL
+**Main Menu**
+![Main Menu](<Theory/Main Menu.png>)
+
+**Account Stats Page**
+![Stats Page](<Theory/Stats Page.png>)
+
+**Leaderboard Page**
+![Leaderboard Page](<Theory/Leaderboard Page.png>)
+
+**Game Page**
+![Game Page](<Theory/Game Page.png>)
 
 ---
 ## **4.5 Version Control Summary**
@@ -245,8 +256,6 @@ Testing improved the final solution by revealing practical issues such as invali
 | TC11 | Timer and end-of-round behavior | Run timed mode until timer expires, then run unlimited mode and press End Game. | Timed game auto-ends at 0 seconds; unlimited mode counts up and ends only when user chooses End Game. | Both timed and unlimited behaviors worked as expected. | Pass |
 | TC12 | Result saving, stats, and leaderboard integration | Complete a logged-in game, then open stats and leaderboard pages. | Game results are saved to users.json, high score updates if beaten, stats totals update, leaderboard sorts by high score. | Data saved correctly, high score updated, and leaderboard ranking reflected saved values. | Pass |
 
-Testing evidence for each case is included in Appendix 7.3 as timestamped logs/screenshots.
-
 ---
 ### **5.3 Evaluation Against Requirements**
 | Requirement | Evaluation and evidence |
@@ -272,7 +281,7 @@ Testing evidence for each case is included in Appendix 7.3 as timestamped logs/s
 | Difficulty is selected manually. | Add adaptive difficulty. | The program could automatically adjust question difficulty based on the user's speed and accuracy, making practice more personalised. |
 | Progress feedback is useful but limited. | Add weakness reports and practice recommendations. | This would help students, parents, and teachers identify which maths areas need more practice. |
 | The interface is functional but could be more engaging. | Add sound effects, achievements, animations, or reward badges. | This could improve motivation for younger users while keeping the core gameplay simple. |
-| Testing is mainly manual. | Add automated unit tests. | Automated tests for authentication, question generation, scoring, and statistics would make future changes safer. |
+| Testing is mainly manual. | Add automated unit tests. | Automated tests for authentication, question generation, scoring, and statistics would make future changes safer and the whole testing process more efficient. |
 
 ---
 
@@ -302,17 +311,15 @@ Testing evidence for each case is included in Appendix 7.3 as timestamped logs/s
 
 ---
 ### **6.2 Secure Software Design and Data Handling**
-The secure software design is partly effective for the scope of this project. It protects user data better than plain-text storage, but it does not provide the same level of protection as a professional online system.
+The secure software design is appropriate for the scope of this project because the application is a small offline maths game, not a large online system. The main user data stored by the program is account login details and performance statistics, such as high score, accuracy, games played, and total time spent.
 
-Passwords are not stored as plain text. Instead, `auth.scramble_password()` hashes passwords using SHA-256 before saving them to `users.json`. This is a positive security practice because the saved value is not the original password. However, the password hashes are not salted, so this method is limited compared with stronger real-world password storage.
+A key security feature is that passwords are not stored as plain text. Instead, the program converts the password into a SHA-256 hash before saving it in `users.json`. This means that if someone opened the user data file, they would not immediately see the user’s actual password. This improves user trust and shows safer handling of login data.
 
-The program also creates a random session token using Python's `secrets.token_hex()` function when a user registers or logs in. This improves the design because the program can store a session value separately from the password.
+The program also uses input validation to protect the reliability and integrity of the system. Registration checks for usernames that are too short, passwords that are too short, usernames with spaces, and duplicate usernames. Login checks whether the account exists and whether the entered password matches the saved hash. The game also validates answer input so only whole-number answers are accepted.
 
-Input validation supports data integrity. Registration checks username length, password length, spaces, and duplicate usernames. Login checks whether the user exists and whether the password is correct. The game checks that answers are whole numbers before processing them. These checks reduce invalid data and help prevent unexpected program behaviour.
+User data is stored locally in a JSON file. This is suitable for the size and purpose of the project because the game is designed to run offline on a local computer. A more advanced real-world version could use salted password hashing, encryption, or a database, but for this school project the current security measures are suitable because they protect passwords better than plain-text storage and prevent common invalid inputs.
 
-Data handling is managed through `users.json`. This file stores user account data and performance statistics, including high score, games played, total correct answers, total answered questions, time spent, and grouped performance data. JSON is suitable for this small local project because it is lightweight and easy to read, but it is less secure and less scalable than a database.
-
-Overall, the security approach is appropriate for this project because it demonstrates hashing, validation, tokens, and error handling. However, a real-world version would need salted password hashing, stronger file protection, encrypted storage, or a proper database to better protect user trust and data integrity.
+Overall, the security approach meets the needs of the project by safely handling basic login data, protecting stored passwords, validating user input, and keeping the application reliable for its intended users.
 
 ---
 ### **6.3 Personal Reflection**

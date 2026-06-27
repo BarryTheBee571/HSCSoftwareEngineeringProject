@@ -1,20 +1,20 @@
 {
     "1234": {
         "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-        "token": "42ec60b9c03241a8ee7d453df282bed9",
+        "token": "16027e568ec20bfa168edf47d3f1a4d0",
         "high_score": 470,
-        "games_played": 20,
+        "games_played": 21,
         "total_correct": 267,
         "total_answered": 275,
-        "tests_started": 28,
-        "total_time_spent_seconds": 463,
+        "tests_started": 29,
+        "total_time_spent_seconds": 497,
         "longest_unlimited_streak": 31,
         "mode_counts": {
             "addition": 12,
             "subtraction": 4,
             "multiplication": 7,
             "division": 3,
-            "mixed": 2
+            "mixed": 3
         },
         "most_played_game_mode": "addition",
         "difficulty_stats": {
@@ -31,7 +31,7 @@
                 "average_accuracy": 97.05882352941177
             },
             "hard": {
-                "tests": 5,
+                "tests": 6,
                 "correct": 6,
                 "answered": 6,
                 "average_accuracy": 100.0
@@ -63,7 +63,7 @@
                 "average_accuracy": 0.0
             },
             "unlimited": {
-                "tests": 15,
+                "tests": 16,
                 "correct": 133,
                 "answered": 139,
                 "average_accuracy": 95.68345323741008
@@ -95,7 +95,7 @@
                 "average_accuracy": 94.73684210526315
             },
             "mixed": {
-                "tests": 1,
+                "tests": 2,
                 "correct": 0,
                 "answered": 0,
                 "average_accuracy": 0.0
@@ -620,6 +620,109 @@
     "test6": {
         "password": "ed0cb90bdfa4f93981a7d03cff99213a86aa96a6cbcf89ec5e8889871f088727",
         "token": "ac573648c30e86fd0790ee758df3fe5c",
+        "high_score": 0,
+        "games_played": 0,
+        "total_correct": 0,
+        "total_answered": 0,
+        "tests_started": 0,
+        "total_time_spent_seconds": 0,
+        "longest_unlimited_streak": 0,
+        "mode_counts": {
+            "addition": 0,
+            "subtraction": 0,
+            "multiplication": 0,
+            "division": 0,
+            "mixed": 0
+        },
+        "most_played_game_mode": "none",
+        "difficulty_stats": {
+            "easy": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "medium": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "hard": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            }
+        },
+        "time_mode_stats": {
+            "30": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "60": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "90": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "120": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "unlimited": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            }
+        },
+        "game_mode_stats": {
+            "addition": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "subtraction": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "multiplication": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "division": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            },
+            "mixed": {
+                "tests": 0,
+                "correct": 0,
+                "answered": 0,
+                "average_accuracy": 0.0
+            }
+        }
+    },
+    "wasd": {
+        "password": "06554c5f75c4f147f4dfe341c4bb94e4bdffe03dea9e30bab2dfd0c97d4148d5",
+        "token": "609a8ca25910bfe59d35852a4d52701a",
         "high_score": 0,
         "games_played": 0,
         "total_correct": 0,

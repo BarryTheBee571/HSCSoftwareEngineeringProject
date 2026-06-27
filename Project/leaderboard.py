@@ -76,7 +76,7 @@ class LeaderboardFrame(ctk.CTkFrame):
         header.grid(row=0, column=0, sticky="ew")
         header.grid_columnconfigure(1, weight=1)
 
-        self.make_button(header, "<- Menu", self.app.show_menu, fg=WHITE, text_color=BLUE, width=90, height=32).grid(
+        self.make_button(header, "⬅️ Menu", self.app.show_menu, fg=WHITE, text_color=BLUE, width=90, height=32).grid(
             row=0, column=0, padx=10, pady=10, sticky="w"
         )
         self.make_label(header, "Leaderboard", size=24, bold=True, color=BLUE).grid(
