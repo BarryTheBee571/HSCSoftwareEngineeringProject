@@ -323,23 +323,76 @@ Overall, the security approach meets the needs of the project by safely handling
 
 ---
 ### **6.3 Personal Reflection**
+This project allowed me to develop a stronger understanding of software engineering principles and apply them in a practical environment. I further enhanced my skills when coding with Python, creating GUI's, fixing various bugs, among other skills. By combining all of these skills I successfully created a program that aligned with my intial problem statement and functional requirements. 
 
-**Reflect** on what you learned during the project, including
+One major skill I improved on was using Tkinter, or more specifically CustomTkinter, which is an extension built upon the original Tkinter. Although I originally thought to use Pygame to create the GUI, I remembered how many problems I had with that when creating my previous task (The Pokemon Program), and how much simpler Tkinter was. A friend introduced me to CustomTkinter which is incredibly similar to Python's built in standard GUI toolkit as it is just an extension to it, but has a more modern look with more customisability. Using this, I was able to create a GUI that satisfied my personal requirements for visual appeal, but looking at the peer feedback, not everyone's. I do partly agree with Shawn's comment on the software being too plain and boring, but as Miles' says "The game's UI was really focused, which was a big benefit for this type of educational game, where I am only trying to focus on one task at a time, and reduce the distractions.", and although the two comments address the same thing, Miles' is more correct. The game is designed to be educational and the target audience was originally aimed at young children (more on this topic later), and so the GUI was made to remove distractions and allow the user to focus on the questions at hand. But Shawn is also somewhat right, it is too plain and boring. Using the same colour pallete that was designed to be dull does make it boring. To fix this I could've used a more colourful range for specific things such as the main menu, leaderboard, stats pages, where you don't need to remove distractions and focus. I could've also added more elements such as pictures or something which would make the use of space better and feel less empty in some areas. But otherwise, I think using CustomTkinter enhanced my skills in creating a GUI and further developed my Python skills alongside.
 
-* Software engineering skills developed
+Challenges that I faced during development were mostly minor, such as changing the questions generation. My first question generation model for subtraction would give you a lot, and I mean a lot, of questions where the answer would just be 1. For example, when testing the bug by just spamming 1 as the answer, you could get 33% accuracy. Obviously this isn't what I intended the game mode to do, so I went through and tested all the game modes to see if there were any issues among the others. To solve this I personalised the question generation for each mode to prevent any of this from happening, and in the end the issue was fixed. That was the only memorable challenge that I faced, fixing question generation to actually work and not just give you really easy questions.
 
-* Challenges encountered and how they were overcome
+In hindsight, I went a bit overboard with the modes. Originally this project was targetted at children of primary school age to help develop a solid foundation for maths. It aimed to quicken their mental maths skills and times tables, so it would be easy questions, but I've added "hard" mode which enlarge the question range by a pretty large amount. Way too big for primary school kids. For example, I don't think any of them could do 45 x 49 in their head, even Shawn who is ranked top 10 in HSC Year 12 Maths Advanced had trouble doing these mentally. But the "easy" mode is still there so you could argue that the children don't necessarily need to interact with the harder difficulties at all and just stick to easy. And an unpredicted benefit was that it does help older people (highschoolers) who rely on a calculator during a test. Will this help remove their dependability on a calculator during a test? Hopefully not because a calculator is always right and way faster most of the time. But in the real world this has potential to help, for example when shopping and you need to quickly add up the price of all your items, so instead of pulling out your phone and opening a calculator, you could quickly do it in your head. So an unseen benefit to going overboard.
 
+Overall this project has further enhanced my ability to develop software. I've found the project I've made to actually help me in life as well. For example at work, we don't have an electronic Point of Sales system so we have to write everything out on paper when taking an order, and oftentimes the customer will ask for price and I've found my speed of adding the items up has increased after making and testing throughout the development process. In the future though if I was to further build on project, I would add features like adaptive difficulty, better actual "teaching" and enhance design. But I think what I've made for this task is satisfactory.
 
 ---
 ## <ins> **7. Appendices** <ins>
 
 ### **7.1 Full Gantt Chart**
+Below Is the accurate Gantt Chart according to actual development timeline
+![Full Gantt Chart](<Theory/Full Gantt Chart.png>)
 
 ### **7.2 Complete Data Dictionary**
 
-### **7.3 Full Test Logs**
+| Name | Type | Description |
+| :---- | :---- | :---- |
+| current_user | String or Null | Username of the logged-in player. Null when using guest mode. |
+| session_token | String or Null | Active session token returned after successful login or registration. Null for guests. |
+| mode | String  | Selected game mode for a test: addition, subtraction, multiplication, division, or mixed. |
+| difficulty | String  | Selected difficulty for a test: easy, medium, or hard. |
+| time_limit | Integer | Time setting for the test in seconds: 30, 60, 90, 120, or -1 for unlimited mode. |
+| unlimited | Boolean | Derived flag indicating whether the test has no countdown timer (time_limit < 0). |
+| question_text | String | Displayed maths question text, for example 8 x 7. |
+| current_answer | Integer | Correct numeric answer for the current question. |
+| raw_answer | String | Raw answer text entered by the player before numeric validation. |
+| score | Integer | Current score in the active test. Increases by 10 for each correct answer. |
+| questions_answered | Integer | Number of valid numeric answers submitted in the active test. |
+| correct_answers | Integer | Number of correct answers in the active test. |
+| current_streak | Integer | Current consecutive-correct-answer streak in the active test. |
+| best_streak | Integer | Highest consecutive-correct-answer streak reached in the active test. |
+| start_time | Float | UNIX timestamp captured when a test starts. |
+| elapsed_seconds | Float | Computed duration of the test in seconds (current_time - start_time). |
+| time_remaining | Float | Computed remaining time in timed modes (time_limit - elapsed_seconds). |
+| timer_id | Integer or Null | GUI scheduler callback identifier used for timer updates; Null when not active. |
+| accuracy | Float | Calculated accuracy percentage for completed test results (correct_answers / questions_answered * 100, safe divide). |
+| feedback_message | String | Player feedback text after submission, such as Correct!, Wrong..., or input validation messages. |
+| users | Object | Top-level dictionary of all registered accounts. Keys are usernames and values are user records. |
+| username | String | Unique account identifier used as a key in users. |
+| password | String | SHA-256 hash of the user password (not stored in plain text). |
+| token | String | Most recent session token generated on login or registration. |
+| high_score | Integer | Highest score ever achieved by this user. |
+| games_played | Integer | Number of completed tests saved for this user. |
+| total_correct | Integer | Total number of correctly answered questions across all completed tests. |
+| total_answered | Integer | Total number of answered questions across all completed tests. |
+| tests_started | Integer | Number of tests started from the menu (including tests that may end with very few answers). |
+| total_time_spent_seconds | Integer | Accumulated play time (seconds) across completed tests. |
+| longest_unlimited_streak | Integer | Best correct-answer streak achieved in unlimited mode. |
+| mode_counts | Object | Counter object showing how many times each game mode was selected at test start. |
+| mode_counts.addition | Integer | Number of tests started in addition mode. |
+| mode_counts.subtraction | Integer | Number of tests started in subtraction mode. |
+| mode_counts.multiplication | Integer | Number of tests started in multiplication mode. |
+| mode_counts.division | Integer | Number of tests started in division mode. |
+| mode_counts.mixed | Integer | Number of tests started in mixed mode. |
+| most_played_game_mode | String  | Most frequently selected mode based on mode_counts; initial value is none. |
+| difficulty_stats | Object | Grouped performance statistics by difficulty level (easy, medium, hard). Each value is a stats bucket. |
+| time_mode_stats | Object | Grouped performance statistics by time mode (30, 60, 90, 120, unlimited). Each value is a stats bucket. |
+| game_mode_stats | Object | Grouped performance statistics by game mode (addition, subtraction, multiplication, division, mixed). Each value is a stats bucket. |
+| tests | Integer | Number of completed tests in a stats bucket category. |
+| correct | Integer | Total correct answers accumulated in a stats bucket category. |
+| answered | Integer | Total answered questions accumulated in a stats bucket category. |
+| average_accuracy | Float | Calculated accuracy percentage for a stats bucket (correct / answered * 100, safe divide). |
+| operand_a | Integer | First operand in generated question expression. |
+| operand_b | Integer | Second operand in generated question expression. |
+| answer | Integer | Correct integer result returned with each generated question. |
+| selected_mode | String  | Final mode used by generator; when menu mode is mixed, one core mode is chosen at random. |
+| answer_range | Tuple(Integer, Integer) | Difficulty-based range used to generate valid answers for addition and division. |
+| operand_range | Tuple(Integer, Integer) | Difficulty-based range used to generate operands for subtraction and multiplication. |
 
-### **7.4 Raw Feedback Notes**
-
-### **7.5 Exemplar Code Snippets**
